@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package org.acme.camel.generated;
+
+option java_package = "org.acme.camel.generated";
+option java_outer_classname = "OrderMessage";
+option java_multiple_files = true;
+
+message Order{
+  string id = 1;
+}
