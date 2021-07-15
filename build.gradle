@@ -13,12 +13,18 @@ repositories {
 
 
 dependencies {
+
+    implementation 'io.quarkus:quarkus-resteasy-jsonb'
     implementation 'org.apache.camel.quarkus:camel-quarkus-jackson'
     implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
     //implementation 'org.apache.camel.quarkus:camel-quarkus-spring-rabbitmq'
     //implementation 'io.quarkus:quarkus-resteasy-jackson'
     implementation 'io.quarkus:quarkus-config-yaml'
     implementation 'org.apache.camel.quarkus:camel-quarkus-rabbitmq'
+   // implementation 'org.apache.camel.quarkus:camel-quarkus-main'
+    implementation 'org.apache.camel.quarkus:camel-quarkus-timer'
+    implementation 'org.apache.camel.quarkus:camel-quarkus-log'
+    implementation 'org.apache.camel.quarkus:camel-quarkus-core'
     //implementation 'org.apache.camel.quarkus:camel-quarkus-protobuf'
     implementation 'io.quarkus:quarkus-arc'
     implementation 'io.quarkus:quarkus-resteasy'

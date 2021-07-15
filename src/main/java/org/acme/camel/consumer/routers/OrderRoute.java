@@ -19,14 +19,15 @@ public class OrderRoute extends RouteBuilder {
 
     @Override
     public void configure() {
-        from("rabbitmq://order?addresses={{rabbitmq.url}}" +
+     from("rabbitmq://order?addresses={{rabbitmq.url}}" +
                 "&queue={{rabbitmq.queue}}" +
                 "&vhost={{rabbitmq.vhost}}" +
                 "&username={{rabbitmq.username}}" +
                 "&password={{rabbitmq.password}}" +
                 "&exchangeType=topic" +
                 "&autoDelete=false")
-               // .unmarshal(new JacksonDataFormat(OrderDTO.class))
+                .routeId("OrderRouterConsumer")
+                 .unmarshal(new JacksonDataFormat(OrderDTO.class))
                 .log("Received Message: ${body}")
                 .process(orderProcessor)
                 .log("Finished. Person successfully created in database: ${body}");

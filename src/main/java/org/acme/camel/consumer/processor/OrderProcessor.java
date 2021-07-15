@@ -16,6 +16,6 @@ public class OrderProcessor implements Processor {
     @Override
     public void process(Exchange exchange) throws Exception {
         final var personMessage = exchange.getIn().getBody(OrderDTO.class);
-        log.info("M=process");
+        log.info("M=process, personMessage={} ", personMessage);
     }
 }
