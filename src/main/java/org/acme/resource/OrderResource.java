@@ -6,16 +6,15 @@ import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 
 
 @Path("orders")
-// @Produces(APPLICATION_JSON)
 public class OrderResource {
 
-    // @Produce(value = "seda://toQueue")
     private final ProducerTemplate producerTemplate;
 
     @Inject
@@ -24,11 +23,17 @@ public class OrderResource {
     }
 
     @POST
-    @Consumes(MediaType.WILDCARD)
-    // @Produces(MediaType.APPLICATION_JSON)
-    public void sendOrder(@RequestBody final OrderDTO orderDTO) {
+    @Consumes
+    public void sendOrder(@RequestBody OrderDTO orderDTO) {
         System.out.println(" --------> ");
-        //producerTemplate.asyncSendBody("seda://toQueue", orderDTO);
+        producerTemplate.asyncSendBody("seda://toQueue", orderDTO);
+    }
+
+    @GET
+    @Consumes(MediaType.WILDCARD)
+    public void sendOrder() {
+        System.out.println(" --------> ");
+        producerTemplate.asyncSendBody("seda://toQueue", "");
     }
 }
 

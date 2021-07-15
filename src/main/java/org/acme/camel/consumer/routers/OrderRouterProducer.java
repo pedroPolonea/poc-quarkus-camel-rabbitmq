@@ -9,16 +9,11 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 @ApplicationScoped
-public class OrderRoute2 extends RouteBuilder {
-
-
-    public OrderRoute2() {
-
-    }
+public class OrderRouterProducer extends RouteBuilder {
 
     @Override
     public void configure() {
-
+/*
         from("timer:fooo?period=10000")
                 .routeId("orderProducer")
                 .setBody().constant("{\"id\":1}")
@@ -31,8 +26,8 @@ public class OrderRoute2 extends RouteBuilder {
                     "&exchangeType=topic" +
                     "&autoDelete=false");
 
+*/
 
-/*
         from("seda://toQueue")
                 .routeId("OrderRouterProducer")
                 .log("Marshalling Message: ${body}")
@@ -46,6 +41,6 @@ public class OrderRoute2 extends RouteBuilder {
                         "&autoDelete=false")
                 .log("Message successfully sent to queue.");
 
-*/
+
     }
 }

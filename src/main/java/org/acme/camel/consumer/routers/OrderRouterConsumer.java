@@ -9,11 +9,11 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 @ApplicationScoped
-public class OrderRoute extends RouteBuilder {
+public class OrderRouterConsumer extends RouteBuilder {
     private OrderProcessor orderProcessor;
 
     @Inject
-    public OrderRoute(final OrderProcessor orderProcessor) {
+    public OrderRouterConsumer(final OrderProcessor orderProcessor) {
         this.orderProcessor = orderProcessor;
     }
 
