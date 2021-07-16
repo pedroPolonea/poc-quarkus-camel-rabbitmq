@@ -15,7 +15,12 @@ public class OrderProcessor implements Processor {
 
     @Override
     public void process(Exchange exchange) throws Exception {
-        final var personMessage = exchange.getIn().getBody(OrderDTO.class);
-        log.info("M=process, personMessage={} ", personMessage);
+        final var orderDTO = exchange.getIn().getBody(OrderDTO.class);
+        log.info("M=process, orderDTO={} ", orderDTO);
+
+        if(orderDTO.getId().equals(0L)){
+            log.error("M=process, E=Vixi, orderDTO={} ", orderDTO);
+            throw new RuntimeException("vixi");
+        }
     }
 }

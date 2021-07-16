@@ -32,13 +32,21 @@ public class OrderRouterProducer extends RouteBuilder {
                 .routeId("OrderRouterProducer")
                 .log("Marshalling Message: ${body}")
                 .marshal(new JacksonDataFormat(OrderDTO.class))
-                .to("rabbitmq://order?addresses={{rabbitmq.url}}" +
-                        "&queue={{rabbitmq.queue}}" +
+                .to("rabbitmq://{{rabbitmq.exchanges.order.name}}" +
+                        "?addresses={{rabbitmq.url}}" +
+                        "&queue={{rabbitmq.exchanges.order.name}}.queue" +
                         "&vhost={{rabbitmq.vhost}}" +
                         "&username={{rabbitmq.username}}" +
                         "&password={{rabbitmq.password}}" +
-                        "&exchangeType=topic" +
-                        "&autoDelete=false")
+                        "&exchangeType={{rabbitmq.exchanges.order.type}}" +
+                        //"&reQueue=true"+
+                        "&autoDelete={{rabbitmq.exchanges.order.auto-delete}}" +
+                        "&arg.queue.x-message-ttl=20000"+
+                        "&deadLetterExchange={{rabbitmq.exchanges.order.name}}"+
+                        "&deadLetterExchangeType={{rabbitmq.exchanges.order.type}}"+
+                        "&deadLetterQueue={{rabbitmq.exchanges.order.name}}.dlq"+
+                        "&deadLetterRoutingKey={{rabbitmq.exchanges.order.name}}.dlq"+
+                        "&autoAck=false")
                 .log("Message successfully sent to queue.");
 
 

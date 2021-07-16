@@ -1,7 +1,13 @@
 rabbitmq:
     url: localhost:5672
     vhost: /test
-    queue: order.queue
     username: guest
     password: guest
+    queue: order.queue
+    exchanges:
+        order:
+            name: order
+            type: topic
+            auto-delete: false
+
 
