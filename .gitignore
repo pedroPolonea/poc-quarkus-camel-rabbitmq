@@ -23,3 +23,6 @@
 hs_err_pid*
 /.idea/
 /build/
+/.gradle/
+/java_pid1212837.hprof
+/.run/

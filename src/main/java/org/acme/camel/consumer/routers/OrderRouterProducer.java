@@ -40,6 +40,7 @@ public class OrderRouterProducer extends RouteBuilder {
                         "&password={{rabbitmq.password}}" +
                         "&exchangeType={{rabbitmq.exchanges.order.type}}" +
                         //"&reQueue=true"+
+                        "&concurrentConsumers=5"+
                         "&autoDelete={{rabbitmq.exchanges.order.auto-delete}}" +
                         "&arg.queue.x-message-ttl=20000"+
                         "&deadLetterExchange={{rabbitmq.exchanges.order.name}}"+

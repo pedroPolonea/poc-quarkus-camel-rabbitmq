@@ -17,6 +17,8 @@ public class OrderProcessor implements Processor {
     public void process(Exchange exchange) throws Exception {
         final var orderDTO = exchange.getIn().getBody(OrderDTO.class);
         log.info("M=process, orderDTO={} ", orderDTO);
+        log.info("M=process, CamelRedeliveryCounter={} ", exchange.getIn().getHeader("CamelRedeliveryCounter"));
+
 
         if(orderDTO.getId().equals(0L)){
             log.error("M=process, E=Vixi, orderDTO={} ", orderDTO);
