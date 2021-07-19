@@ -3,11 +3,15 @@ rabbitmq:
     vhost: /test
     username: guest
     password: guest
-    queue: order.queue
     exchanges:
         order:
             name: order
             type: topic
             auto-delete: false
+            number-consumers: 3
+            number-retries: 3
+            redelivery-delay: 3000
+            maximum-redeliveries: -1
+
 
 

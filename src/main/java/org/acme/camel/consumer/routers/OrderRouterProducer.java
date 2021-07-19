@@ -1,12 +1,12 @@
 package org.acme.camel.consumer.routers;
 
-import org.acme.camel.consumer.processor.OrderProcessor;
 import org.acme.camel.dto.OrderDTO;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.jackson.JacksonDataFormat;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+
+import static org.acme.camel.consumer.routers.OrderRouterConsumer.URL_QUEUE_ORDER;
 
 @ApplicationScoped
 public class OrderRouterProducer extends RouteBuilder {
@@ -32,24 +32,9 @@ public class OrderRouterProducer extends RouteBuilder {
                 .routeId("OrderRouterProducer")
                 .log("Marshalling Message: ${body}")
                 .marshal(new JacksonDataFormat(OrderDTO.class))
-                .to("rabbitmq://{{rabbitmq.exchanges.order.name}}" +
-                        "?addresses={{rabbitmq.url}}" +
-                        "&queue={{rabbitmq.exchanges.order.name}}.queue" +
-                        "&vhost={{rabbitmq.vhost}}" +
-                        "&username={{rabbitmq.username}}" +
-                        "&password={{rabbitmq.password}}" +
-                        "&exchangeType={{rabbitmq.exchanges.order.type}}" +
-                        //"&reQueue=true"+
-                        "&concurrentConsumers=5"+
-                        "&autoDelete={{rabbitmq.exchanges.order.auto-delete}}" +
-                        "&arg.queue.x-message-ttl=20000"+
-                        "&deadLetterExchange={{rabbitmq.exchanges.order.name}}"+
-                        "&deadLetterExchangeType={{rabbitmq.exchanges.order.type}}"+
-                        "&deadLetterQueue={{rabbitmq.exchanges.order.name}}.dlq"+
-                        "&deadLetterRoutingKey={{rabbitmq.exchanges.order.name}}.dlq"+
-                        "&autoAck=false")
+                .to(URL_QUEUE_ORDER)
                 .log("Message successfully sent to queue.");
-
-
     }
+
+
 }
