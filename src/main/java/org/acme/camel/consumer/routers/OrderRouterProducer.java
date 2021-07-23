@@ -1,12 +1,8 @@
 package org.acme.camel.consumer.routers;
 
-import org.acme.camel.dto.OrderDTO;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.jackson.JacksonDataFormat;
 
 import javax.enterprise.context.ApplicationScoped;
-
-import static org.acme.camel.consumer.routers.OrderRouterConsumer.URL_QUEUE_ORDER;
 
 @ApplicationScoped
 public class OrderRouterProducer extends RouteBuilder {
@@ -26,7 +22,7 @@ public class OrderRouterProducer extends RouteBuilder {
                     "&exchangeType=topic" +
                     "&autoDelete=false");
 
-*/
+
 
         from("seda://toQueue")
                 .routeId("OrderRouterProducer")
@@ -34,6 +30,11 @@ public class OrderRouterProducer extends RouteBuilder {
                 .marshal(new JacksonDataFormat(OrderDTO.class))
                 .to(URL_QUEUE_ORDER)
                 .log("Message successfully sent to queue.");
+
+ */
+
+
+
     }
 
 

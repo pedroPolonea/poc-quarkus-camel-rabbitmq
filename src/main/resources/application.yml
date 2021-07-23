@@ -4,7 +4,7 @@ rabbitmq:
     username: guest
     password: guest
     exchanges:
-        order:
+      exchange[0]:
             name: order
             type: topic
             auto-delete: false
@@ -12,6 +12,13 @@ rabbitmq:
             number-retries: 3
             redelivery-delay: 3000
             maximum-redeliveries: -1
-
+      exchange[1]:
+            name: order2
+            type: topic
+            auto-delete: false
+            number-consumers: 3
+            number-retries: 3
+            redelivery-delay: 3000
+            maximum-redeliveries: -1
 
 
